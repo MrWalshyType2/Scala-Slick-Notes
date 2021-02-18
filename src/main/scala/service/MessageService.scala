@@ -16,10 +16,6 @@ class MessageService(private val profileToPass: JdbcProfile) extends DatabaseLay
     Message("Bye", 24L)
   )
 
-  val dropMessageTable: DBIO[Unit] = DBIO.seq(messages.schema.drop)
-  val initMessageTable: DBIO[Unit] = DBIO.seq(messages.schema.create)
-  val initialDataInsert: DBIO[Unit] = DBIO.seq(messages ++= initData)
-
   def initMessages(): Future[Option[Int]] = {
     val dropMessagesTable: DBIO[Unit] = DBIO.seq(messages.schema.dropIfExists)
     val createMessagesTable: DBIO[Unit] = DBIO.seq(messages.schema.createIfNotExists)
