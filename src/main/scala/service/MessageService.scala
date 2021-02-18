@@ -5,11 +5,9 @@ import slick.jdbc.JdbcProfile
 
 import scala.concurrent.Future
 
-class MessageService(private val profileToPass: JdbcProfile) {
+class MessageService(private val profileToPass: JdbcProfile) extends DatabaseLayer(profileToPass) {
 
-  val dbLayerSchema = new DatabaseLayer(profileToPass)
-
-  import dbLayerSchema._, profile.api._
+  import profile.api._
 
   val db = Database.forConfig("mysqlDB")
 
